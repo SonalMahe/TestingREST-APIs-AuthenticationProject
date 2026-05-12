@@ -1,6 +1,6 @@
-import {Router} from 'express';
-import{verifyToken} from '../middleware/authMiddleware.js';
-import {getBooks, getBookById, createBook, updateBook, deleteBook} from '../controllers/bookController.js';
+import { Router } from 'express';
+import { verifyToken } from '../middleware/verifyToken.js';
+import { getAllBooks, getBookById, addBook, addReview } from '../data/store.js';
 
 const router = Router();
 
@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
   res.json(book);
 });
 
-//protected-must be logged in 
+//Protected-must be logged in 
 router.post('/', verifyToken, (req, res) => {
     const{title, author ,genre } = req.body;
     if (!title || !author || !genre) {
