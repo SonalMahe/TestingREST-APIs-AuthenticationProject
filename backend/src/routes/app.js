@@ -3,4 +3,13 @@ import cors from 'cors';
 import bookroutes from './routes/book.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5500',     
+    credentials: true,      
+}));
+
+app.use(express.json());
+app.use('/api/books', bookroutes);
+
+export default app;     
