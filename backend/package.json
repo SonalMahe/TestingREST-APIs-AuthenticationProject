@@ -15,8 +15,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "vitest run"
-  },
+     "test": "vitest run --reporter=verbose"  
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SonalMahe/TestingREST-APIs-AuthenticationProject.git"
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/SonalMahe/TestingREST-APIs-AuthenticationProject#readme",
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.6",
     "vitest": "^4.1.6"
   }
 }

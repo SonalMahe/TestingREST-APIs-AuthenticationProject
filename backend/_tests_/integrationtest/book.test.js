@@ -28,6 +28,18 @@ describe('GET /api/books', () => {
     expect(status).toBe(200);
     expect(Array.isArray(body)).toBe(true);
   });
+
+  test('each book has required fields', async () => {
+    const { body } = await request('GET', '/api/books');
+
+    body.forEach(book => {
+      expect(book).toHaveProperty('id');
+      expect(book).toHaveProperty('title');
+      expect(book).toHaveProperty('author');
+      expect(book).toHaveProperty('genre');
+      expect(book).toHaveProperty('reviews');
+    });
+  });
 });
 
 
@@ -62,7 +74,8 @@ describe('POST /api/books', () => {
 
     expect(status).toBe(401);
   });
-//Test adding book with valid token
+
+  //Test adding book with valid token
   test('adds a new book with valid token', async () => {
     const { status, body } = await request('POST', '/api/books', {
       token: 'valid-test-token',
@@ -75,6 +88,29 @@ describe('POST /api/books', () => {
 
     expect(status).toBe(201);
     expect(body.title).toBe('New Book');
+  });
+
+//Test adding book with missing fields returns 400
+  test('returns 400 when required fields are missing', async () => {
+    const { status } = await request('POST', '/api/books', {
+      token: 'valid-test-token',
+      body: { title: 'No Author or Genre' }
+    });
+
+    expect(status).toBe(400);
+  });
+//Test created book has all required fields
+  test('created book has all required fields', async () => {
+    const { body } = await request('POST', '/api/books', {
+      token: 'valid-test-token',
+      body: { title: 'Full Book', author: 'Someone', genre: 'Drama' }
+    });
+
+    expect(body).toHaveProperty('id');
+    expect(body).toHaveProperty('title');
+    expect(body).toHaveProperty('author');
+    expect(body).toHaveProperty('genre');
+    expect(body).toHaveProperty('reviews');
   });
 });
 
@@ -91,7 +127,8 @@ describe('POST /api/books/:id/reviews', () => {
 
     expect(status).toBe(401);
   });
-//Test adding review with valid token
+
+  //Test adding review with valid token
   test('adds review with valid token', async () => {
     const { status, body } = await request('POST', '/api/books/1/reviews', {
       token: 'valid-test-token',
@@ -103,5 +140,24 @@ describe('POST /api/books/:id/reviews', () => {
 
     expect(status).toBe(201);
     expect(body.reviews.length).toBeGreaterThan(0);
+  });
+
+  //Test adding review with missing fields returns 400
+  test('returns 400 when required fields are missing', async () => {
+    const { status } = await request('POST', '/api/books/1/reviews', {
+      token: 'valid-test-token',
+      body: { rating: 5 }
+    });
+
+    expect(status).toBe(400);
+  });
+
+  test('returns 404 for non-existent book', async () => {
+    const { status } = await request('POST', '/api/books/999/reviews', {
+      token: 'valid-test-token',
+      body: { rating: 5, comment: 'Great' }
+    });
+
+    expect(status).toBe(404);
   });
 });
