@@ -1,12 +1,6 @@
 import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
 import admin from "firebase-admin";
-import dotenv from "dotenv";
 import app from './src/app.js';
-
-
-dotenv.config();
 
 admin.initializeApp({
   credential: admin.credential.cert({
