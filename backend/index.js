@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import app from './src/app.js';
 
 
+dotenv.config();
+
 admin.initializeApp({
   credential: admin.credential.cert({
     projectId: process.env.FIREBASE_PROJECT_ID,
