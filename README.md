@@ -151,11 +151,11 @@ Spins up a real HTTP server and tests full request/response cycles. Firebase Adm
 
 ### Screenshot — local tests passing
 
-![Local tests passing](docs/localpassedtest.png)
+![Local tests passing](backend/docs/localpassedtest.png)
 
 ### Screenshot — GitHub Actions pipeline passing
 
-![GitHub Actions pipeline passing](docs/githubPassedtest.png)
+![GitHub Actions pipeline passing](backend/docs/githubPassedtest.png)
 
 ---
 
