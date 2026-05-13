@@ -103,8 +103,8 @@ npm start
 |--------|-------|------|-------------|
 | GET | `/api/books` | — | Get all books |
 | GET | `/api/books/:id` | — | Get book by ID |
-| POST | `/api/books` | Add a new book |
-| POST | `/api/books/:id/reviews` | Add a review |
+| POST | `/api/books` | -| Add a new book |
+| POST | `/api/books/:id/reviews` | -| Add a review |
 
 Protected routes require a Firebase ID token in the header:
 ```
@@ -124,30 +124,40 @@ npm test
 
 ### Unit Tests — `_tests_/unittest/unittest.test.js`
 
-Test the data store functions directly, no HTTP involved.
+Test the data store functions directly, no HTTP involved. **13 tests total.**
 
 | Test | Verifies |
 |------|----------|
 | `getAllBooks` returns all books | Returns a non-empty array |
+| `getAllBooks` each book has required fields | Every book has id, title, author, genre, reviews |
 | `getBookById` returns correct book | Finds book by ID |
 | `getBookById` returns undefined for invalid ID | Handles missing book gracefully |
 | `addBook` adds a new book | Creates book with correct fields and ID |
+| `addBook` added book can be retrieved by id | Store is updated after adding |
+| `addBook` each new book gets a unique id | Auto-increment works correctly |
 | `addReview` adds review to existing book | Appends review to book's reviews array |
+| `addReview` review contains correct data | Review fields match input |
+| `addReview` multiple reviews can be added | Reviews accumulate correctly |
 | `addReview` returns null for invalid book ID | Returns null for non-existent book |
 
 ### Integration Tests — `_tests_/integrationtest/book.test.js`
 
-Spins up a real HTTP server and tests full request/response cycles. Firebase Admin is **fully mocked** — no real credentials needed.
+Spins up a real HTTP server and tests full request/response cycles. Firebase Admin is **fully mocked** — no real credentials needed. **10 tests total.**
 
 | Test | Expected |
 |------|----------|
-| `GET /api/books` | `200` + array |
+| `GET /api/books` returns all books | `200` + array |
+| `GET /api/books` each book has required fields | All books have correct structure |
 | `GET /api/books/:id` valid ID | `200` + book object |
 | `GET /api/books/:id` invalid ID | `404` |
 | `POST /api/books` — no token | `401` |
 | `POST /api/books` — valid token | `201` + new book |
+| `POST /api/books` — missing fields | `400` |
+| `POST /api/books` created book has all required fields | Response has correct structure |
 | `POST /api/books/:id/reviews` — no token | `401` |
 | `POST /api/books/:id/reviews` — valid token | `201` + updated book |
+| `POST /api/books/:id/reviews` — missing fields | `400` |
+| `POST /api/books/:id/reviews` — non-existent book | `404` |
 
 ### Screenshot — local tests passing
 
@@ -155,7 +165,7 @@ Spins up a real HTTP server and tests full request/response cycles. Firebase Adm
 
 ### Screenshot — GitHub Actions pipeline passing
 
-![GitHub Actions pipeline passing](backend/docs/githubPassedtest.png)
+![GitHub Actions pipeline passing](backend/docs/passedtest.png)
 
 ---
 
