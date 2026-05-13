@@ -1,26 +1,6 @@
-
 import app from '../../src/app.js';
 import { resetStore } from '../../src/data/store.js';
 import http from 'node:http';
-
-// vi.mock is hoisted by Vitest — runs before any import below
-vi.mock('firebase-admin', () => ({
-  default: {
-    apps: [],
-    initializeApp: vi.fn(),
-    credential: { cert: vi.fn(() => ({})) },
-    auth: vi.fn(() => ({
-      verifyIdToken: vi.fn(async (token) => {
-        if (token === 'valid-test-token') {
-          return { uid: 'user-123', email: 'test@example.com', name: 'Test User' };
-        }
-        throw new Error('Firebase: Invalid ID token');
-      })
-    }))
-  }
-}));
-
-
 
 let server;
 let port;
@@ -36,8 +16,6 @@ beforeAll(() => {
   });
 });
 
-
-
 // Close the server after all tests
 afterAll(() => {
   return new Promise((resolve) => server.close(resolve));
@@ -49,7 +27,7 @@ beforeEach(() => {
 });
 
 
-// Helper function to make HTTP requests to our server-
+// Helper function to make HTTP requests to our server
 export function request(method, path, options = {}) {
   return new Promise((resolve, reject) => {
     const body = options.body ? JSON.stringify(options.body) : null;

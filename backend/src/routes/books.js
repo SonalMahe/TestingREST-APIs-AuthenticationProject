@@ -5,8 +5,8 @@ import { getAllBooks, getBookById, addBook, addReview } from '../data/store.js';
 const router = Router();
 
 //public routes-anyone can read books
-router.get('/', (req,res)=>{
-    res.json({message: 'Welcome to the Book API!'});        
+router.get('/', (req, res) => {
+  res.json(getAllBooks());
 });
 
 router.get('/:id', (req, res) => {
