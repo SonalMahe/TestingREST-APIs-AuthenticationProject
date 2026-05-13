@@ -1,4 +1,5 @@
 import { describe, test, expect, vi } from "vitest";
+import { request } from './mocktest.js';
 
 // vi.mock is hoisted by Vitest — must be in the test file, not a helper
 vi.mock('firebase-admin', () => ({
@@ -17,7 +18,7 @@ vi.mock('firebase-admin', () => ({
   }
 }));
 
-import { request } from './mocktest.js';
+
 
 //Test GET /api/books endpoint returns all books successfully
 describe('GET /api/books', () => {
