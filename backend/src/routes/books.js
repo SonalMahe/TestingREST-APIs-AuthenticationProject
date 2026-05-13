@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { verifyToken } from '../middleware/verifytoken.js';
-import { getAllBooks, getBookById, addBook, addReview } from '../data/store.js';
+import { getAllBooks, getBookById, addBook, addReview, deleteBook, updateBook } from '../data/store.js';
 
 const router = Router();
 
@@ -23,6 +23,18 @@ router.post('/', verifyToken, (req, res) => {
   }
   const book = addBook({ title, author, genre });
   res.status(201).json(book);
+});
+
+router.delete('/:id', verifyToken, (req, res) => {
+  const deleted = deleteBook(req.params.id);
+  if (!deleted) return res.status(404).json({ error: 'Book not found' });
+  res.json({ message: 'Book deleted' });
+});
+
+router.put('/:id', verifyToken, (req, res) => {
+  const book = updateBook(req.params.id, req.body);
+  if (!book) return res.status(404).json({ error: 'Book not found' });
+  res.json(book);
 });
 
 router.post('/:id/reviews', verifyToken, (req, res) => {

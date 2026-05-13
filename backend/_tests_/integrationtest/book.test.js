@@ -20,6 +20,32 @@ vi.mock('firebase-admin', () => ({
 
 
 
+// Authentication failure tests
+describe('Authentication', () => {
+  test('rejects request with invalid token', async () => {
+    const { status } = await request('POST', '/api/books', {
+      token: 'invalid-token-xyz',
+      body: { title: 'Test', author: 'Test', genre: 'Test' }
+    });
+    expect(status).toBe(401);
+  });
+
+  test('rejects request with no token', async () => {
+    const { status } = await request('POST', '/api/books', {
+      body: { title: 'Test', author: 'Test', genre: 'Test' }
+    });
+    expect(status).toBe(401);
+  });
+
+  test('allows request with valid token', async () => {
+    const { status } = await request('POST', '/api/books', {
+      token: 'valid-test-token',
+      body: { title: 'Test', author: 'Test', genre: 'Test' }
+    });
+    expect(status).toBe(201);
+  });
+});
+
 //Test GET /api/books endpoint returns all books successfully
 describe('GET /api/books', () => {
   test('returns all books', async () => {

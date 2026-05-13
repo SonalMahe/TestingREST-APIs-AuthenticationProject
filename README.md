@@ -69,7 +69,7 @@ Fill in `backend/.env` with your Firebase service account values:
 
 ```env
 PORT=3000
-CORS_ORIGIN=http://localhost:5500
+CORS_ORIGIN=http://localhost:5173
 
 FIREBASE_PROJECT_ID=your-project-id
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk@your-project-id.iam.gserviceaccount.com
