@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { verifyToken } from '../middleware/verifyToken.js';
+import { verifyToken } from '../middleware/verifytoken.js';
 import { getAllBooks, getBookById, addBook, addReview } from '../data/store.js';
 
 const router = Router();
