@@ -89,7 +89,7 @@ describe('POST /api/books', () => {
     expect(status).toBe(201);
     expect(body.title).toBe('New Book');
   });
-  
+
 //Test adding book with missing fields returns 400
   test('returns 400 when required fields are missing', async () => {
     const { status } = await request('POST', '/api/books', {
@@ -99,7 +99,7 @@ describe('POST /api/books', () => {
 
     expect(status).toBe(400);
   });
-
+//Test created book has all required fields
   test('created book has all required fields', async () => {
     const { body } = await request('POST', '/api/books', {
       token: 'valid-test-token',
