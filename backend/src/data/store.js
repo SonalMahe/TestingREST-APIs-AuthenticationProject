@@ -1,5 +1,5 @@
 let books = [
-  { id: 1, title: 'The Ramayan', author: 'valmiki', genre: 'Hindu Epic', reviews: [] },
+  { id: 1, title: 'The Ramayan', author: 'Valmiki', genre: 'Hindu Epic', reviews: [] },
   { id: 2, title: 'Clean Code', author: 'Robert C. Martin', genre: 'Technology', reviews: [] },
   { id: 3, title: 'Atomic Habits', author: 'James Clear', genre: 'Self-Help', reviews: [] },
   { id: 4, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'Classic', reviews: [] },
@@ -8,7 +8,7 @@ let books = [
   { id: 7, title: 'The Mahabharata', author: 'Vyasa', genre: 'Hindu Epic', reviews: [] },
   { id: 8, title: 'Bhagavad Gita', author: 'Vyasa', genre: 'Spiritual', reviews: [] },
   { id: 9, title: 'Sapiens', author: 'Yuval Noah Harari', genre: 'History', reviews: [] },
-  { id: 10, title: 'Harry Potter and the Sorcerer\'s Stone', author: 'J.K. Rowling', genre: 'Fantasy', reviews: [] },
+  { id: 10, title: 'Harry Potter and the Sorcerer Stone', author: 'J.K. Rowling', genre: 'Fantasy', reviews: [] },
   { id: 11, title: 'The Lord of the Rings', author: 'J.R.R. Tolkien', genre: 'Fantasy', reviews: [] }
 ];
 
@@ -37,9 +37,15 @@ export function addReview(bookId, review) {
 
 export function resetStore() {
   books = [
-    { id: 1, title: 'The Ramayan', author: 'valmiki', genre: 'Hindu Epic', reviews: [] },
+    { id: 1, title: 'The Ramayan', author: 'Valmiki', genre: 'Hindu Epic', reviews: [] },
     { id: 2, title: 'Clean Code', author: 'Robert C. Martin', genre: 'Technology', reviews: [] },
-    { id: 3, title: 'Atomic Habits', author: 'James Clear', genre: 'Self-Help', reviews: [] }
+    { id: 3, title: 'Atomic Habits', author: 'James Clear', genre: 'Self-Help', reviews: [] },
+    { id: 4, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'Classic', reviews: [] },
+    { id: 5, title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Classic', reviews: [] },
+    { id: 6, title: 'The Ramayan', author: 'Valmiki', genre: 'Hindu Epic', reviews: [] },
+    { id: 7, title: 'The Mahabharata', author: 'Vyasa', genre: 'Hindu Epic', reviews: [] },
+    { id: 8, title: 'Bhagavad Gita', author: 'Vyasa', genre: 'Spiritual', reviews: [] },
+    
   ];
-  nextId = 4;
+  nextId = 9;
 }
