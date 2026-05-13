@@ -103,8 +103,8 @@ npm start
 |--------|-------|------|-------------|
 | GET | `/api/books` | — | Get all books |
 | GET | `/api/books/:id` | — | Get book by ID |
-| POST | `/api/books` | ✅ | Add a new book |
-| POST | `/api/books/:id/reviews` | ✅ | Add a review |
+| POST | `/api/books` | Add a new book |
+| POST | `/api/books/:id/reviews` | Add a review |
 
 Protected routes require a Firebase ID token in the header:
 ```
@@ -151,11 +151,11 @@ Spins up a real HTTP server and tests full request/response cycles. Firebase Adm
 
 ### Screenshot — local tests passing
 
-![Local tests passing](docs/screenshots/tests-passing-locally.png)
+![Local tests passing](docs/screenshots/localpassedtest.png)
 
 ### Screenshot — GitHub Actions pipeline passing
 
-![GitHub Actions pipeline passing](docs/screenshots/github-actions-pipeline-passing.png)
+![GitHub Actions pipeline passing](docs/screenshots/githubPassedtest.png)
 
 ---
 
