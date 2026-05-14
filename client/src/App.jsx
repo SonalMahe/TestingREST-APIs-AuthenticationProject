@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { onAuthChange, loginWithGoogle, logout } from './services/auth.js';
 import BookList from './components/BookList.jsx';
-import './App.css';
+import './styles/main.css';
+import './styles/Header.css';
+import './styles/Hero.css';
 
 function App() {
   const [user, setUser] = useState(null);
