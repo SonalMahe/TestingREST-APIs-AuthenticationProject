@@ -1,9 +1,12 @@
 node_modules/
 .env
 .DS_Store
+dist/
+build/
 *.log
 *.cache
 *.tmp
 .idea/
-.vscode/
+.vscode/    
 firebaseAuthenticationKey.json
+.testfile

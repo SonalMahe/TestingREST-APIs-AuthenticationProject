@@ -20,6 +20,32 @@ vi.mock('firebase-admin', () => ({
 
 
 
+// Authentication failure tests
+describe('Authentication', () => {
+  test('rejects request with invalid token', async () => {
+    const { status } = await request('POST', '/api/books', {
+      token: 'invalid-token-xyz',
+      body: { title: 'Test', author: 'Test', genre: 'Test' }
+    });
+    expect(status).toBe(401);
+  });
+
+  test('rejects request with no token', async () => {
+    const { status } = await request('POST', '/api/books', {
+      body: { title: 'Test', author: 'Test', genre: 'Test' }
+    });
+    expect(status).toBe(401);
+  });
+
+  test('allows request with valid token', async () => {
+    const { status } = await request('POST', '/api/books', {
+      token: 'valid-test-token',
+      body: { title: 'Test', author: 'Test', genre: 'Test' }
+    });
+    expect(status).toBe(201);
+  });
+});
+
 //Test GET /api/books endpoint returns all books successfully
 describe('GET /api/books', () => {
   test('returns all books', async () => {
@@ -111,6 +137,26 @@ describe('POST /api/books', () => {
     expect(body).toHaveProperty('author');
     expect(body).toHaveProperty('genre');
     expect(body).toHaveProperty('reviews');
+  });
+});
+
+
+//Test GET /api/profile endpoint requires auth and returns user data
+describe('GET /api/profile', () => {
+  test('returns 401 without token', async () => {
+    const { status } = await request('GET', '/api/profile');
+
+    expect(status).toBe(401);
+  });
+
+  test('returns user profile with valid token', async () => {
+    const { status, body } = await request('GET', '/api/profile', {
+      token: 'valid-test-token'
+    });
+
+    expect(status).toBe(200);
+    expect(body).toHaveProperty('uid');
+    expect(body).toHaveProperty('email');
   });
 });
 

@@ -69,7 +69,7 @@ Fill in `backend/.env` with your Firebase service account values:
 
 ```env
 PORT=3000
-CORS_ORIGIN=http://localhost:5500
+CORS_ORIGIN=http://localhost:5173
 
 FIREBASE_PROJECT_ID=your-project-id
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk@your-project-id.iam.gserviceaccount.com
@@ -103,8 +103,9 @@ npm start
 |--------|-------|------|-------------|
 | GET | `/api/books` | — | Get all books |
 | GET | `/api/books/:id` | — | Get book by ID |
-| POST | `/api/books` | -| Add a new book |
-| POST | `/api/books/:id/reviews` | -| Add a review |
+| POST | `/api/books` | Required | Add a new book |
+| POST | `/api/books/:id/reviews` | Required | Add a review |
+| GET | `/api/profile` | Required | Get logged-in user profile |
 
 Protected routes require a Firebase ID token in the header:
 ```
@@ -124,7 +125,7 @@ npm test
 
 ### Unit Tests — `_tests_/unittest/unittest.test.js`
 
-Test the data store functions directly, no HTTP involved. **13 tests total.**
+Test the data store functions directly, no HTTP involved. **11 tests total.**
 
 | Test | Verifies |
 |------|----------|
@@ -142,10 +143,13 @@ Test the data store functions directly, no HTTP involved. **13 tests total.**
 
 ### Integration Tests — `_tests_/integrationtest/book.test.js`
 
-Spins up a real HTTP server and tests full request/response cycles. Firebase Admin is **fully mocked** — no real credentials needed. **10 tests total.**
+Spins up a real HTTP server and tests full request/response cycles. Firebase Admin is **fully mocked** — no real credentials needed. **17 tests total.**
 
 | Test | Expected |
 |------|----------|
+| Authentication — invalid token | `401` |
+| Authentication — no token | `401` |
+| Authentication — valid token | `201` |
 | `GET /api/books` returns all books | `200` + array |
 | `GET /api/books` each book has required fields | All books have correct structure |
 | `GET /api/books/:id` valid ID | `200` + book object |
@@ -154,6 +158,8 @@ Spins up a real HTTP server and tests full request/response cycles. Firebase Adm
 | `POST /api/books` — valid token | `201` + new book |
 | `POST /api/books` — missing fields | `400` |
 | `POST /api/books` created book has all required fields | Response has correct structure |
+| `GET /api/profile` — no token | `401` |
+| `GET /api/profile` — valid token | `200` + user object |
 | `POST /api/books/:id/reviews` — no token | `401` |
 | `POST /api/books/:id/reviews` — valid token | `201` + updated book |
 | `POST /api/books/:id/reviews` — missing fields | `400` |

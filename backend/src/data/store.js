@@ -35,6 +35,22 @@ export function addReview(bookId, review) {
   return book;
 }
 
+export function deleteBook(id) {
+  const index = books.findIndex(b => b.id === parseInt(id));
+  if (index === -1) return false;
+  books.splice(index, 1);
+  return true;
+}
+
+export function updateBook(id, { title, author, genre }) {
+  const book = getBookById(id);
+  if (!book) return null;
+  if (title) book.title = title;
+  if (author) book.author = author;
+  if (genre) book.genre = genre;
+  return book;
+}
+
 export function resetStore() {
   books = [
     { id: 1, title: 'The Ramayan', author: 'Valmiki', genre: 'Hindu Epic', reviews: [] },
