@@ -1,4 +1,4 @@
-# Bookstore Review API
+# Book Review API
 
 A Node.js/Express REST API for managing books and reviews, secured with Firebase Authentication, tested with Vitest, and automated with GitHub Actions CI.
 
@@ -12,28 +12,62 @@ TestingREST-APIs-AuthenticationProject/
 ├── backend/
 │   ├── src/
 │   │   ├── routes/
-│   │   │   └── books.js          # API route handlers
+│   │   │   └── books.js             # API route handlers
 │   │   ├── middleware/
-│   │   │   └── verifytoken.js    # Firebase token verification
+│   │   │   └── verifytoken.js       # Firebase token verification
 │   │   ├── data/
-│   │   │   └── store.js          # In-memory data store
-│   │   └── app.js                # Express app setup
+│   │   │   └── store.js             # In-memory data store
+│   │   └── app.js                   # Express app setup
 │   ├── _tests_/
 │   │   ├── unittest/
-│   │   │   └── unittest.test.js  # Unit tests for store functions
+│   │   │   └── unittest.test.js     # Unit tests for store functions
 │   │   └── integrationtest/
-│   │       ├── book.test.js      # Integration tests for API routes
-│   │       └── mocktest.js       # Test server + request helper
-│   ├── .env.example              # Environment variable template
+│   │       ├── book.test.js         # Integration tests for API routes
+│   │       └── mocktest.js          # Test server + request helper
+│   ├── docs/
+│   │   ├── localpassedtest.png      # Screenshot — local tests
+│   │   ├── passedtest.png           # Screenshot — CI pipeline
+│   │   └── failedtest.png           # Screenshot — failed test example
+│   ├── .env.example                 # Environment variable template
 │   ├── vitest.config.js
-│   ├── index.js                  # Server entry point
+│   ├── index.js                     # Server entry point
 │   └── package.json
 │
 ├── client/
-│   └── src/
-│       └── firebase/
-│           └── firebase.init.js  # Firebase client SDK setup
+│   ├── public/
+│   │   └── favicon.svg
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx           # Sticky header with login/logout
+│   │   │   ├── Hero.jsx             # Welcome banner (shown when logged out)
+│   │   │   ├── BookList.jsx         # Fetches and displays all books
+│   │   │   ├── BookCard.jsx         # Single book card with reviews
+│   │   │   ├── AddBookForm.jsx      # Form to add a new book
+│   │   │   └── AddReviewForm.jsx    # Form to add a review
+│   │   ├── services/
+│   │   │   ├── api.js               # Fetch helper (adds auth token to requests)
+│   │   │   └── auth.js              # Firebase login, logout, token helpers
+│   │   ├── firebase/
+│   │   │   └── firebase.init.js     # Firebase client SDK setup
+│   │   ├── styles/
+│   │   │   ├── main.css             # Global styles, buttons, layout
+│   │   │   ├── Header.css
+│   │   │   ├── Hero.css
+│   │   │   └── components/
+│   │   │       ├── BookList.css
+│   │   │       ├── BookCard.css
+│   │   │       ├── AddBookForm.css
+│   │   │       └── AddReviewForm.css
+│   │   ├── App.jsx                  # Root component — auth state + layout
+│   │   └── main.jsx                 # React entry point
+│   ├── index.html
+│   ├── vite.config.js
+│   └── package.json
 │
+├── .github/
+│   └── workflows/
+│       └── ci.yml                   # GitHub Actions pipeline
+├── .gitignore
 └── README.md
 ```
 
@@ -92,9 +126,15 @@ VITE_FIREBASE_APP_ID=your-app-id
 ### 4. Run locally
 
 ```bash
+# Terminal 1 — start the backend
 cd backend
 npm start
 # Server runs on http://localhost:3000
+
+# Terminal 2 — start the frontend
+cd client
+npm run dev
+# App runs on http://localhost:5173
 ```
 
 ### API Endpoints

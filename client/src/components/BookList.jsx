@@ -9,26 +9,38 @@ function BookList({ user }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchBooks = async () => {
-    try {
+  // Runs once when the component first appears on screen
+  useEffect(() => {
+    async function loadBooks() {
       setLoading(true);
       setError(null);
+      try {
+        const data = await api.get('/books');
+        setBooks(data);
+      } catch {
+        setError('Failed to load books. Make sure the backend server is running on port 3000.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadBooks();
+  }, []);
+
+  // Called by child components after adding, editing, or deleting a book
+  async function refreshBooks() {
+    try {
       const data = await api.get('/books');
       setBooks(data);
     } catch {
-      setError('Failed to load books. Make sure the backend server is running on port 3000.');
-    } finally {
-      setLoading(false);
+      setError('Failed to refresh books.');
     }
-  };
-
-  useEffect(() => { fetchBooks(); }, []);
+  }
 
   return (
     <div className="book-list">
       <div className="list-header">
         <h2>All Books {!loading && `(${books.length})`}</h2>
-        {user && <AddBookForm onBookAdded={fetchBooks} />}
+        {user && <AddBookForm onBookAdded={refreshBooks} />}
       </div>
 
       {!user && (
@@ -43,7 +55,7 @@ function BookList({ user }) {
       {!loading && !error && (
         <div className="books-grid">
           {books.map(book => (
-            <BookCard key={book.id} book={book} user={user} onUpdate={fetchBooks} />
+            <BookCard key={book.id} book={book} user={user} onUpdate={refreshBooks} />
           ))}
         </div>
       )}
