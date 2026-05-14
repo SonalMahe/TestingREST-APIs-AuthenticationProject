@@ -141,6 +141,26 @@ describe('POST /api/books', () => {
 });
 
 
+//Test GET /api/profile endpoint requires auth and returns user data
+describe('GET /api/profile', () => {
+  test('returns 401 without token', async () => {
+    const { status } = await request('GET', '/api/profile');
+
+    expect(status).toBe(401);
+  });
+
+  test('returns user profile with valid token', async () => {
+    const { status, body } = await request('GET', '/api/profile', {
+      token: 'valid-test-token'
+    });
+
+    expect(status).toBe(200);
+    expect(body).toHaveProperty('uid');
+    expect(body).toHaveProperty('email');
+  });
+});
+
+
 //Test POST /api/books/:id/reviews endpoint requires auth and adds review with valid token
 describe('POST /api/books/:id/reviews', () => {
   test('returns 401 without token for review', async () => {

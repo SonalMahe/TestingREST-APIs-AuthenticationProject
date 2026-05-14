@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bookroutes from './routes/books.js';
+import { verifyToken } from './middleware/verifytoken.js';
 
 const app = express();
 
@@ -14,4 +15,8 @@ app.use(cors({
 app.use(express.json());
 app.use('/api/books', bookroutes);
 
-export default app;     
+app.get('/api/profile', verifyToken, (req, res) => {
+  res.json({ uid: req.user.uid, email: req.user.email, name: req.user.name });
+});
+
+export default app;
