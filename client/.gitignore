@@ -7,4 +7,5 @@ build/
 *.cache
 *.tmp
 .idea/
-.vscode/    
+.vscode/
+firebaseAuthenticationKey.json
