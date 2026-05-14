@@ -1,4 +1,9 @@
 node_modules/
 .env
-
+.DS_Store
+*.log
+*.cache
+*.tmp
+.idea/
+.vscode/
 firebaseAuthenticationKey.json
