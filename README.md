@@ -1,4 +1,4 @@
-# Bookstore Review API
+# Books Review API
 
 A Node.js/Express REST API for managing books and reviews, secured with Firebase Authentication, tested with Vitest, and automated with GitHub Actions CI.
 
@@ -12,28 +12,66 @@ TestingREST-APIs-AuthenticationProject/
 ├── backend/
 │   ├── src/
 │   │   ├── routes/
-│   │   │   └── books.js          # API route handlers
+│   │   │   └── books.js             # API route handlers
 │   │   ├── middleware/
-│   │   │   └── verifytoken.js    # Firebase token verification
+│   │   │   └── verifytoken.js       # Firebase token verification
 │   │   ├── data/
-│   │   │   └── store.js          # In-memory data store
-│   │   └── app.js                # Express app setup
+│   │   │   └── store.js             # In-memory data store
+│   │   └── app.js                   # Express app setup
 │   ├── _tests_/
 │   │   ├── unittest/
-│   │   │   └── unittest.test.js  # Unit tests for store functions
+│   │   │   └── unittest.test.js     # Unit tests for store functions
 │   │   └── integrationtest/
-│   │       ├── book.test.js      # Integration tests for API routes
-│   │       └── mocktest.js       # Test server + request helper
-│   ├── .env.example              # Environment variable template
+│   │       ├── book.test.js         # Integration tests for API routes
+│   │       └── mocktest.js          # Test server + request helper
+│   ├── docs/
+│   │   ├── localpassedtest.png      # Screenshot — local tests
+│   │   ├── passedtest.png           # Screenshot — CI pipeline
+│   │   └── failedtest.png           # Screenshot — failed test example
+│   ├── .env.example                 # Environment variable template
 │   ├── vitest.config.js
-│   ├── index.js                  # Server entry point
+│   ├── index.js                     # Server entry point
 │   └── package.json
 │
 ├── client/
-│   └── src/
-│       └── firebase/
-│           └── firebase.init.js  # Firebase client SDK setup
+│   ├── public/
+│   │   └── favicon.svg
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx           # Sticky header with login/logout
+│   │   │   ├── Hero.jsx             # Welcome banner (shown when logged out)
+│   │   │   ├── BookList.jsx         # Fetches and displays all books
+│   │   │   ├── BookCard.jsx         # Single book card with reviews
+│   │   │   ├── AddBookForm.jsx      # Form to add a new book
+│   │   │   └── AddReviewForm.jsx    # Form to add a review
+│   │   ├── services/
+│   │   │   ├── api.js               # Fetch helper (adds auth token to requests)
+│   │   │   └── auth.js              # Firebase login, logout, token helpers
+│   │   ├── firebase/
+│   │   │   └── firebase.init.js     # Firebase client SDK setup
+│   │   ├── styles/
+│   │   │   ├── main.css             # Global styles, buttons, layout
+│   │   │   ├── Header.css
+│   │   │   ├── Hero.css
+│   │   │   └── components/
+│   │   │       ├── BookList.css
+│   │   │       ├── BookCard.css
+│   │   │       ├── AddBookForm.css
+│   │   │       └── AddReviewForm.css
+│   │   ├── _tests_/
+│   │   │   ├── setup.js             # jest-dom setup for component tests
+│   │   │   └── components.test.jsx  # UI component tests
+│   │   ├── App.jsx                  # Root component — auth state + layout
+│   │   └── main.jsx                 # React entry point
+│   ├── index.html
+│   ├── vite.config.js               # Vite config
+│   ├── vitest.config.js             # Vitest config for UI tests
+│   └── package.json
 │
+├── .github/
+│   └── workflows/
+│       └── ci.yml                   # GitHub Actions pipeline
+├── .gitignore
 └── README.md
 ```
 
@@ -92,9 +130,15 @@ VITE_FIREBASE_APP_ID=your-app-id
 ### 4. Run locally
 
 ```bash
+# Terminal 1 — start the backend
 cd backend
 npm start
 # Server runs on http://localhost:3000
+
+# Terminal 2 — start the frontend
+cd client
+npm run dev
+# App runs on http://localhost:5173
 ```
 
 ### API Endpoints
@@ -119,13 +163,32 @@ Authorization: Bearer <firebase-id-token>
 ### Run tests
 
 ```bash
+# Backend — unit + integration tests
 cd backend
+npm test
+
+# Frontend — UI component tests
+cd client
 npm test
 ```
 
-### Unit Tests — `_tests_/unittest/unittest.test.js`
+### UI Component Tests — `client/src/_tests_/components.test.jsx`
 
-Test the data store functions directly, no HTTP involved. **11 tests total.**
+Tests React components in a fake browser (jsdom) with no real network calls. Firebase and the API are mocked. **7 tests total.**
+
+| Test | Verifies |
+|------|----------|
+| Header — shows login button when not logged in | "Sign in with Google" is visible |
+| Header — shows username when logged in | User's display name appears |
+| Header — shows logout button when logged in | Logout button is visible |
+| BookList — hides Add Book when not logged in | "+ Add Book" button not shown |
+| BookList — shows books when API returns data | Book titles rendered on screen |
+| BookList — shows error when API fails | Error message displayed |
+| BookList — shows login notice when not logged in | "Log in with Google" notice shown |
+
+### Unit Tests — `backend/_tests_/unittest/unittest.test.js`
+
+Tests the data store functions directly, no HTTP involved. **11 tests total.**
 
 | Test | Verifies |
 |------|----------|
@@ -210,6 +273,7 @@ Spins up a real HTTP server and tests full request/response cycles. Firebase Adm
 - **In-memory store** — Keeps the project focused on auth and testing. A real project would swap `store.js` for a database layer.
 - **Mocking Firebase in tests** — `vi.mock('firebase-admin')` makes tests fast, deterministic, and runnable in CI with no real credentials.
 - **`resetStore()` in `beforeEach`** — Ensures every test starts with a clean state and results don't depend on execution order.
+- **React Testing Library + jsdom** — UI component tests render real components in a fake browser. Firebase and API services are mocked so tests run without any network connection.
 
 ### Challenges
 
