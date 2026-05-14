@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { api } from '../services/api.js';
+import '../styles/components/AddReviewForm.css';
 
 function AddReviewForm({ bookId, onReviewAdded }) {
   const [form, setForm] = useState({ rating: 5, comment: '' });

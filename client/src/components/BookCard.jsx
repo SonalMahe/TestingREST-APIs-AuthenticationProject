@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AddReviewForm from './AddReviewForm.jsx';
 import { api } from '../services/api.js';
+import '../styles/components/BookCard.css';
 
 function BookCard({ book, user, onUpdate }) {
   const [showReviews, setShowReviews] = useState(false);

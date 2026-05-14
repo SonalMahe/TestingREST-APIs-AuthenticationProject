@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../services/api.js';
 import BookCard from './BookCard.jsx';
 import AddBookForm from './AddBookForm.jsx';
+import '../styles/components/BookList.css';
 
 function BookList({ user }) {
   const [books, setBooks] = useState([]);

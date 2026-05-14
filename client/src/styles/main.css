@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0ebe3;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(99,77,158,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(233,69,96,0.06) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: #2c2c2c;
+  min-height: 100vh;
+}
+
+/* ── Layout ── */
+main { max-width: 1140px; margin: 2.5rem auto; padding: 0 1.5rem; }
+
+.fullscreen-center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+}
+.fullscreen-center p { color: rgba(255,255,255,0.6); }
+
+/* ── Banners ── */
+.banner { padding: 0.7rem 2rem; font-size: 0.875rem; }
+.error-banner { background: #fff0f0; color: #c0392b; border-left: 4px solid #e74c3c; }
+
+/* ── State boxes ── */
+.state-box {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 14px;
+  color: #888;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.error-box { color: #c0392b; background: #fff5f5; }
+
+/* ── Shared form utilities ── */
+.form-actions { display: flex; gap: 0.5rem; }
+
+.error-text {
+  font-size: 0.82rem;
+  color: #c0392b;
+  background: #fff0f0;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  border-left: 3px solid #e74c3c;
+}
+
+/* ── Buttons ── */
+.btn {
+  padding: 0.5rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.18s;
+  background: #e0e0e0;
+  color: #333;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-primary { background: linear-gradient(135deg, #e94560, #c0392b); color: white; }
+.btn-google  { background: white; color: #444; display: flex; align-items: center; gap: 0.5rem; }
+.btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.6); color: white; }
+.btn-sm      { padding: 0.3rem 0.7rem; font-size: 0.78rem; border-radius: 6px; }
+.btn-edit    { background: linear-gradient(135deg, #f6a623, #e67e22); color: white; }
+.btn-delete  { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }

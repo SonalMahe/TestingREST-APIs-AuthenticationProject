@@ -1,0 +1,36 @@
+.review-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid #f0f0f0;
+}
+.review-form input {
+  flex: 1;
+  min-width: 130px;
+  padding: 0.55rem 0.85rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #fafafa;
+}
+.review-form input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+  background: white;
+}
+.review-form select {
+  width: auto;
+  padding: 0.55rem 0.85rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  background: #fafafa;
+}

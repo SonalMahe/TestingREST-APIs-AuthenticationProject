@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { onAuthChange, loginWithGoogle, logout } from './services/auth.js';
+import { onAuthChange, loginWithGoogle } from './services/auth.js';
+import Header from './components/Header.jsx';
+import Hero from './components/Hero.jsx';
 import BookList from './components/BookList.jsx';
-import './App.css';
+import './styles/main.css';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,38 +37,9 @@ function App() {
 
   return (
     <div className="app">
-      <header className="header">
-        <div className="header-left">
-          <span className="logo">📚</span>
-          <h1>Bookstore</h1>
-        </div>
-        <div className="header-right">
-          {user ? (
-            <>
-              {user.photoURL && <img src={user.photoURL} alt={user.displayName} className="avatar" />}
-              <span className="username">{user.displayName}</span>
-              <button className="btn btn-outline" onClick={logout}>Logout</button>
-            </>
-          ) : (
-            <button className="btn btn-google" onClick={handleLogin}>
-              Sign in with Google
-            </button>
-          )}
-        </div>
-      </header>
-
-      {!user && (
-        <div className="hero">
-          <h2>Discover & Review Books</h2>
-          <p>Browse the collection — sign in to add books and share your reviews</p>
-          <button className="btn btn-primary" onClick={handleLogin}>
-            Sign in with Google
-          </button>
-        </div>
-      )}
-
+      <Header user={user} onLogin={handleLogin} />
+      {!user && <Hero onLogin={handleLogin} />}
       {authError && <div className="banner error-banner">{authError}</div>}
-
       <main>
         <BookList user={user} />
       </main>

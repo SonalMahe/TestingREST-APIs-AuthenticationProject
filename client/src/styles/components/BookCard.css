@@ -1,0 +1,79 @@
+.book-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, #667eea, #764ba2) 1;
+  border-image-slice: 1;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+.book-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); }
+
+.book-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.book-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.genre-badge {
+  font-size: 0.68rem;
+  background: linear-gradient(135deg, #667eea20, #764ba220);
+  color: #5a4a9e;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-weight: 600;
+  flex-shrink: 0;
+  border: 1px solid #667eea30;
+}
+
+.author { font-size: 0.82rem; color: #888; font-style: italic; }
+.book-footer { display: flex; gap: 0.4rem; margin-top: 0.5rem; flex-wrap: wrap; }
+
+/* ── Reviews ── */
+.reviews {
+  margin-top: 0.7rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.review-item {
+  background: linear-gradient(135deg, #fafafa, #f5f5f5);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+  color: #555;
+  border-left: 3px solid #e94560;
+}
+.stars { display: block; font-size: 0.75rem; margin-bottom: 0.2rem; }
+.no-reviews { font-size: 0.82rem; color: #bbb; text-align: center; padding: 0.5rem; }
+
+/* ── Inline edit form ── */
+.edit-form { display: flex; flex-direction: column; gap: 0.5rem; }
+.edit-form input {
+  width: 100%;
+  padding: 0.55rem 0.85rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background: #fafafa;
+}
+.edit-form input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+  background: white;
+}
