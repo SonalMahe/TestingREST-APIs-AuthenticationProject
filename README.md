@@ -1,4 +1,4 @@
-# Bookstore REST API
+# Bookstore Review API
 
 A Node.js/Express REST API for managing books and reviews, secured with Firebase Authentication, tested with Vitest, and automated with GitHub Actions CI.
 
