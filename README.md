@@ -1,4 +1,4 @@
-# Book Review API
+# Books Review API
 
 A Node.js/Express REST API for managing books and reviews, secured with Firebase Authentication, tested with Vitest, and automated with GitHub Actions CI.
 
@@ -58,10 +58,14 @@ TestingREST-APIs-AuthenticationProject/
 │   │   │       ├── BookCard.css
 │   │   │       ├── AddBookForm.css
 │   │   │       └── AddReviewForm.css
+│   │   ├── _tests_/
+│   │   │   ├── setup.js             # jest-dom setup for component tests
+│   │   │   └── components.test.jsx  # UI component tests
 │   │   ├── App.jsx                  # Root component — auth state + layout
 │   │   └── main.jsx                 # React entry point
 │   ├── index.html
-│   ├── vite.config.js
+│   ├── vite.config.js               # Vite config
+│   ├── vitest.config.js             # Vitest config for UI tests
 │   └── package.json
 │
 ├── .github/
@@ -159,13 +163,32 @@ Authorization: Bearer <firebase-id-token>
 ### Run tests
 
 ```bash
+# Backend — unit + integration tests
 cd backend
+npm test
+
+# Frontend — UI component tests
+cd client
 npm test
 ```
 
-### Unit Tests — `_tests_/unittest/unittest.test.js`
+### UI Component Tests — `client/src/_tests_/components.test.jsx`
 
-Test the data store functions directly, no HTTP involved. **11 tests total.**
+Tests React components in a fake browser (jsdom) with no real network calls. Firebase and the API are mocked. **7 tests total.**
+
+| Test | Verifies |
+|------|----------|
+| Header — shows login button when not logged in | "Sign in with Google" is visible |
+| Header — shows username when logged in | User's display name appears |
+| Header — shows logout button when logged in | Logout button is visible |
+| BookList — hides Add Book when not logged in | "+ Add Book" button not shown |
+| BookList — shows books when API returns data | Book titles rendered on screen |
+| BookList — shows error when API fails | Error message displayed |
+| BookList — shows login notice when not logged in | "Log in with Google" notice shown |
+
+### Unit Tests — `backend/_tests_/unittest/unittest.test.js`
+
+Tests the data store functions directly, no HTTP involved. **11 tests total.**
 
 | Test | Verifies |
 |------|----------|
@@ -250,6 +273,7 @@ Spins up a real HTTP server and tests full request/response cycles. Firebase Adm
 - **In-memory store** — Keeps the project focused on auth and testing. A real project would swap `store.js` for a database layer.
 - **Mocking Firebase in tests** — `vi.mock('firebase-admin')` makes tests fast, deterministic, and runnable in CI with no real credentials.
 - **`resetStore()` in `beforeEach`** — Ensures every test starts with a clean state and results don't depend on execution order.
+- **React Testing Library + jsdom** — UI component tests render real components in a fake browser. Firebase and API services are mocked so tests run without any network connection.
 
 ### Challenges
 

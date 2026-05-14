@@ -28,9 +28,11 @@ function BookList({ user }) {
 
   // Called by child components after adding, editing, or deleting a book
   async function refreshBooks() {
+    setError(null);
     try {
       const data = await api.get('/books');
       setBooks(data);
+      setError(null);
     } catch {
       setError('Failed to refresh books.');
     }
