@@ -30,6 +30,8 @@ describe('Authentication', () => {
     expect(status).toBe(401);
   });
 
+
+  //Test POST /api/books endpoint requires auth
   test('rejects request with no token', async () => {
     const { status } = await request('POST', '/api/books', {
       body: { title: 'Test', author: 'Test', genre: 'Test' }
@@ -37,6 +39,8 @@ describe('Authentication', () => {
     expect(status).toBe(401);
   });
 
+
+//Test POST /api/books endpoint allows valid token
   test('allows request with valid token', async () => {
     const { status } = await request('POST', '/api/books', {
       token: 'valid-test-token',
@@ -55,6 +59,8 @@ describe('GET /api/books', () => {
     expect(Array.isArray(body)).toBe(true);
   });
 
+
+//Test GET /api/books endpoint returns books with required fields
   test('each book has required fields', async () => {
     const { body } = await request('GET', '/api/books');
 
