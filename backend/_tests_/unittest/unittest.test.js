@@ -64,6 +64,7 @@ describe('addBook', () => {
     expect(newBook).toHaveProperty('id');
   });
 
+  // Verify that the new book is actually added to the store
   test('added book can be retrieved by id', () => {
     const newBook = addBook({ title: 'Test Book', author: 'Tester', genre: 'Drama' });
     const found = getBookById(newBook.id);
@@ -72,6 +73,7 @@ describe('addBook', () => {
     expect(found.title).toBe('Test Book');
   });
 
+// Ensure that each new book gets a unique id
   test('each new book gets a unique id', () => {
     const book1 = addBook({ title: 'Book A', author: 'Author A', genre: 'Fiction' });
     const book2 = addBook({ title: 'Book B', author: 'Author B', genre: 'Fiction' });
@@ -92,6 +94,7 @@ describe('addReview', () => {
     expect(updatedBook.reviews.length).toBe(1);
   });
 
+// Verify that the review is correctly added to the book's reviews array
   test('review contains correct data', () => {
     const updatedBook = addReview(1, { rating: 4, comment: 'Good read' });
     const review = updatedBook.reviews[0];
@@ -100,6 +103,8 @@ describe('addReview', () => {
     expect(review.comment).toBe('Good read');
   });
 
+
+// Ensure that multiple reviews can be added to the same book
   test('multiple reviews can be added to same book', () => {
     addReview(1, { rating: 5, comment: 'First review' });
     const updatedBook = addReview(1, { rating: 3, comment: 'Second review' });
@@ -107,6 +112,8 @@ describe('addReview', () => {
     expect(updatedBook.reviews.length).toBe(2);
   });
 
+  
+// Verify that adding a review to a non-existent book returns null
   test('returns null for invalid book id', () => {
     const result = addReview(999, {
       rating: 5,

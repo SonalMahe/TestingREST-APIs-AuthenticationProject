@@ -29,6 +29,8 @@ describe('Header', () => {
     expect(screen.getByText('Sign in with Google')).toBeInTheDocument();
   });
 
+
+  //Test shows username and logout button when user is logged in
   test('shows username when user is logged in', () => {
     const fakeUser = { displayName: 'Sonal', photoURL: null };
     render(<Header user={fakeUser} onLogin={() => {}} />);
@@ -36,6 +38,8 @@ describe('Header', () => {
     expect(screen.getByText('Sonal')).toBeInTheDocument();
   });
 
+
+  //Test shows username and logout button when user is logged in
   test('shows logout button when user is logged in', () => {
     const fakeUser = { displayName: 'Sonal', photoURL: null };
     render(<Header user={fakeUser} onLogin={() => {}} />);
@@ -50,6 +54,8 @@ describe('BookList', () => {
     vi.clearAllMocks();
   });
 
+
+  //Test hides Add Book button when user is not logged in
   test('hides Add Book button when user is not logged in', async () => {
     api.get.mockResolvedValue([]);
     render(<BookList user={null} />);
@@ -59,6 +65,8 @@ describe('BookList', () => {
     });
   });
 
+
+  //Test shows list of books when data is returned from API
   test('shows list of books when data is returned from API', async () => {
     api.get.mockResolvedValue([
       { id: 1, title: 'Clean Code', author: 'Robert C. Martin', genre: 'Tech', reviews: [] },
@@ -72,6 +80,7 @@ describe('BookList', () => {
     });
   });
 
+  //Test shows error message when API fails
   test('shows error message when API fails', async () => {
     api.get.mockRejectedValue(new Error('Server not running'));
     render(<BookList user={null} />);
@@ -81,6 +90,8 @@ describe('BookList', () => {
     });
   });
 
+
+  //Test shows not logged in notice when user is not logged in
   test('shows not logged in notice when user is not logged in', async () => {
     api.get.mockResolvedValue([]);
     render(<BookList user={null} />);
