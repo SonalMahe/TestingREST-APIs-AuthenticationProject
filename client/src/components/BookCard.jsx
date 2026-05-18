@@ -64,15 +64,15 @@ function BookCard({ book, user, onUpdate }) {
 
           <div className="book-footer">
             <button className="btn btn-sm" onClick={() => setShowReviews(!showReviews)}>
-              {showReviews ? 'Hide' : '📖 Reviews'} ({book.reviews.length})
+              {showReviews ? 'Hide' : ' Reviews'} ({book.reviews.length})
             </button>
             {user && (
               <>
                 <button className="btn btn-primary btn-sm" onClick={() => setShowReviewForm(!showReviewForm)}>
                   {showReviewForm ? 'Cancel' : '+ Review'}
                 </button>
-                <button className="btn btn-sm btn-edit" onClick={() => setEditing(true)}>✏️</button>
-                <button className="btn btn-sm btn-delete" onClick={handleDelete} disabled={loading}>🗑️</button>
+                <button className="btn btn-sm btn-edit" onClick={() => setEditing(true)}></button>
+                <button className="btn btn-sm btn-delete" onClick={handleDelete} disabled={loading}></button>
               </>
             )}
           </div>
