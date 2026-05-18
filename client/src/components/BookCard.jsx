@@ -71,8 +71,8 @@ function BookCard({ book, user, onUpdate }) {
                 <button className="btn btn-primary btn-sm" onClick={() => setShowReviewForm(!showReviewForm)}>
                   {showReviewForm ? 'Cancel' : '+ Review'}
                 </button>
-                <button className="btn btn-sm btn-edit" onClick={() => setEditing(true)}></button>
-                <button className="btn btn-sm btn-delete" onClick={handleDelete} disabled={loading}></button>
+                <button className="btn btn-sm btn-edit" onClick={() => setEditing(true)}>Edit</button>
+                <button className="btn btn-sm btn-delete" onClick={handleDelete} disabled={loading}>Delete</button>
               </>
             )}
           </div>
