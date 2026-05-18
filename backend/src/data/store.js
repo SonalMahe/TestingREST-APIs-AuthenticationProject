@@ -1,5 +1,5 @@
 let books = [
-  { id: 1, title: 'The Ramayan', author: 'Valmiki', genre: 'Hindu Epic', reviews: [ { id: 1, text: 'Great book!' } ] },
+  { id: 1, title: 'The Ramayan', author: 'Valmiki', genre: 'Hindu Epic', reviews: [ ] },
   { id: 2, title: 'Clean Code', author: 'Robert C. Martin', genre: 'Technology', reviews: [] },
   { id: 3, title: 'Atomic Habits', author: 'James Clear', genre: 'Self-Help', reviews: [] },
   { id: 4, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'Classic', reviews: [] },
